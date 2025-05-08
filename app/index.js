@@ -1,5 +1,6 @@
 // app/index.js
 import React, { useState } from "react";
+import { List, FAB, Dialog, Avatar } from 'react-native-paper';
 import {
     View,
     Text,
@@ -60,16 +61,20 @@ export default function HomeScreen() {
     return (
         <View style={styles.container}>
             {/* Botão para abrir o modal */}
-            <Pressable
-                onPress={() => {
-                    setNewContact("");
-                    setEditIndex(null);
-                    setModalVisible(true);
-                }}
-                style={styles.addButton}
-            >
-                <Text style={styles.addButtonText}>＋ Novo Contato</Text>
-            </Pressable>
+            <View style={styles.addContactContainer}>
+                <Text style={styles.addContactText}>Adicionar Contato</Text>
+                <FAB
+                    icon="plus"
+                    onPress={() => {
+                        setNewContact("");
+                        setEditIndex(null);
+                        setModalVisible(true);
+                    }}
+                    style={styles.addButton}
+                >
+                    <Text style={styles.addButtonText}>＋ Novo Contato</Text>
+                </FAB>
+            </View>
 
             {/* Lista de contatos */}
             <FlatList
@@ -114,12 +119,13 @@ export default function HomeScreen() {
                                 ? "Digite seu novo contato:"
                                 : "Edite o contato:"}
                         </Text>
-                        <TextInput
-                            value={newContact} 
-                            onChangeText={setNewContact} 
-                            placeholder="Ex: Vitor"
-                            style={styles.input}
-                        />
+
+                            <TextInput
+                                onChangeText={setNewContact}
+                                placeholder="Ex: Vitor"
+                                style={styles.input}
+                            />
+
                         <Pressable onPress={addOrEditContact} style={{ marginBottom: 8 }}>
                             <Text style={{ color: "#6200ee", textAlign: "center" }}>
                                 {editIndex === null ? "Adicionar" : "Salvar alterações"}
@@ -146,8 +152,10 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         alignSelf: "center",
         backgroundColor: "#1b98e0", // Vermelho (Pantone 485)
-        padding: 12,
+        padding: 2,
+        paddingHorizontal: 72,
         borderRadius: 8,
+        border: "1px solid black",
     },
     addButtonText: {
         color: "#fff",
@@ -207,5 +215,18 @@ const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 6,
         marginBottom: 12,
+    },
+
+    addContactContainer: {
+        flexDirection: "collumn",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 16,
+        marginBottom: 16,
+        gap: 20,
+    },
+    addContactText: {
+        fontSize: 30,
+        textAlign: "center",
     },
 });

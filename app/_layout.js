@@ -17,7 +17,7 @@ export default function Layout() {
             <Stack.Screen
                 name="index"
                 options={{
-                    title: "📝 ContactMaster",
+                    title: "📞 ContactMaster",
                     headerRight: () => (
                         <Pressable
                             onPress={() => router.push("/settings")} // Navegação para a tela de configurações
